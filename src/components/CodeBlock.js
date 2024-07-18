@@ -115,9 +115,12 @@ function CodeBlock() {
         </div>
       )}
       {smiley && <SmileyComponent />}
-      <button onClick={handleShowSolution}>
-        {showSolution ? 'Hide Solution' : 'Show Solution'}
-      </button>
+      <button 
+        onClick={handleShowSolution} 
+        style={{ width: '50px', backgroundColor: 'gray' }}
+        >
+        {showSolution ? 'Hide' : 'Show'}
+        </button>
       {showSolution && (
         <div className="solution-container">
           <h2>Solution</h2>
