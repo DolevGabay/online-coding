@@ -6,7 +6,7 @@ import 'prismjs/themes/prism-okaidia.css'; // Change to the desired theme
 import 'prismjs/components/prism-javascript'; // Import the language you need
 import './CodeBlock.css';
 import { v4 as uuidv4 } from 'uuid'; // Import uuid for generating unique identifiers
-import getConfig from '../config-front';
+const config = require('../config.json');
 
 function CodeBlock() {
   const { id } = useParams();
@@ -25,7 +25,7 @@ function CodeBlock() {
   useEffect(() => {
     localStorage.setItem('clientId', clientId); // Store the clientId in local storage
 
-    const socket = io(`${getConfig.backend.clean}${port}`, {
+    const socket = io(`${config.backend.clean}${port}`, {
       query: { clientId }
     });
 

@@ -1,19 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Lobby.css';
-import getConfig from '../config-front';
+const config = require('../config.json');
+
 
 function Lobby() {
   const navigate = useNavigate();
   const [codeBlocks, setCodeBlocks] = useState([]);
 
   useEffect(() => {
-    console.log('Fetching code blocks1');
     const fetchCodeBlocks = async () => {
       try {
-        console.log('Fetching code blocks');
-        const config = getConfig();
-        console.log(`${config.backend.url}/code-blocks`);
         const response = await fetch(`${config.backend.url}/code-blocks`);
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
@@ -27,11 +24,10 @@ function Lobby() {
     };
     fetchCodeBlocks();
   }, []);
-
+  
   const handleCreateRoom = async (roomId) => {
     console.log('Creating room', roomId);
     try {
-      const config = getConfig();
       const response = await fetch(`${config.backend.url}/create-room`, {
         method: 'POST',
         headers: {
@@ -68,6 +64,7 @@ function Lobby() {
       </div>
     </div>
   );
+  
 }
 
 export default Lobby;

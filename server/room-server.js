@@ -3,7 +3,7 @@ const http = require('http');
 const { Server } = require('socket.io');
 const cors = require('cors');
 const { connectToMongo, fetchCodeBlocks } = require('./mongodbOperations');
-const getConfig = require('./config-back');
+const config = require('./config-back');
 
 const port = process.argv[3];
 
@@ -13,13 +13,13 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: getConfig.frontend.url,
+    origin: config.frontend.url,
     methods: ["GET", "POST"]
   }
 });
 
 app.use(cors({
-  origin: getConfig.frontend.url
+  origin: config.frontend.url
 }));
 
 let usersCount = 0;

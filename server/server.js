@@ -3,7 +3,7 @@ const http = require('http');
 const { fork } = require('child_process');
 const cors = require('cors');
 const { connectToMongo, fetchCodeBlocks } = require('./mongodbOperations');
-const getConfig = require('./config-back');
+const config = require('./config-back');
 
 const app = express();
 const server = http.createServer(app);
@@ -12,7 +12,7 @@ const workers = {};
 const roomPorts = {};
 
 app.use(express.json());
-app.use(cors({ origin: getConfig.frontend.url }));
+app.use(cors({ origin: config.frontend.url }));
 
 connectToMongo();
 
@@ -55,6 +55,6 @@ app.get('/code-blocks', async (req, res) => {
   });
   
 
-server.listen(getConfig.backend.port, () => {
-  console.log(`Master server listening on port ${getConfig.backend.port}`);
+server.listen(config.backend.port, () => {
+  console.log(`Master server listening on port ${config.backend.port}`);
 });
