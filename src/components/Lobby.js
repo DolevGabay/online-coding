@@ -10,6 +10,7 @@ function Lobby() {
   useEffect(() => {
     const fetchCodeBlocks = async () => {
       try {
+        console.log(`${config.backend.url}/code-blocks`)
         const response = await fetch(`${config.backend.url}/code-blocks`);
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
