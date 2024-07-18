@@ -1,8 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Lobby.css';
-const config = require('../config.json');
-
+import config from '../config-front';
 
 function Lobby() {
   const navigate = useNavigate();
@@ -24,7 +23,7 @@ function Lobby() {
     };
     fetchCodeBlocks();
   }, []);
-  
+
   const handleCreateRoom = async (roomId) => {
     console.log('Creating room', roomId);
     try {
@@ -64,7 +63,6 @@ function Lobby() {
       </div>
     </div>
   );
-  
 }
 
 export default Lobby;

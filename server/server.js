@@ -3,7 +3,7 @@ const http = require('http');
 const { fork } = require('child_process');
 const cors = require('cors');
 const { connectToMongo, fetchCodeBlocks } = require('./mongodbOperations');
-const config = require('./config');
+const config = require('./config-back');
 
 const app = express();
 const server = http.createServer(app);

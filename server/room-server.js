@@ -3,7 +3,7 @@ const http = require('http');
 const { Server } = require('socket.io');
 const cors = require('cors');
 const { connectToMongo, fetchCodeBlocks } = require('./mongodbOperations');
-const config = require('./config');
+const config = require('./config-back');
 
 
 const port = process.argv[3];
