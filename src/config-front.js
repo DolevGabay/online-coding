@@ -3,14 +3,14 @@ const config = {
       "backend": {
         "port": 3000,
         "url": "http://localhost:3000",
-        "clean" :"http://localhost:",
+        "clean": "http://localhost:",
       }
     },
     "production": {
       "backend": {
         "port": 3000,
         "url": "http://3.68.213.133:3000",
-        "clean" :"http://3.68.213.133:",
+        "clean": "http://3.68.213.133:",
       }
     }
   };
@@ -20,5 +20,5 @@ const config = {
     return config[env];
   };
   
-  module.exports = getConfig();
+  export default getConfig();
   
