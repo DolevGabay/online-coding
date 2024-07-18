@@ -39,7 +39,7 @@ function Lobby() {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
       const { port, isMentor } = await response.json();
-      navigate(`/codeblock/${roomId}?port=${port}&isMentor=${isMentor}`);
+      navigate(`/codeblock/${roomId}?port=${port}`);
     } catch (error) {
       console.error('Error creating room:', error);
     }
@@ -56,7 +56,7 @@ function Lobby() {
                 <h2>{String(index + 1).padStart(2, '0')}</h2>
                 <h3>{block.name}</h3>
                 <p>{block.description}</p>
-                <button onClick={() => handleCreateRoom(block.id)}>Create Room</button>
+                <button onClick={() => handleCreateRoom(block.id)}>Select</button>
               </div>
             </div>
           </div>

@@ -66,9 +66,6 @@ app.post('/code-blocks', async (req, res) => {
       res.status(500).json({ success: false, message: 'Server Error' });
     }
   });
-  
-  
-  
 
 server.listen(config.backend.port, () => {
   console.log(`Master server listening on port ${config.backend.port}`);
