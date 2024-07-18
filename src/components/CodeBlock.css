@@ -1,6 +1,6 @@
 /* Container for the code block */
 body {
-    display: inline;
+    display: inline; 
 }
 .code-block {
     padding: 20px;

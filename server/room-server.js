@@ -36,7 +36,7 @@ io.on('connection', (socket) => {
         const codeBlocks = await fetchCodeBlocks();
         const codeBlock = codeBlocks.find(block => block.id === id);
         if (codeBlock) {
-          socket.emit('load', { name: codeBlock.name, code: codeBlock.code, isMentor });
+          socket.emit('load', { name: codeBlock.name, code: codeBlock.code,solution : codeBlock.solution , isMentor });
         }
       } catch (err) {
         console.error(err.message);

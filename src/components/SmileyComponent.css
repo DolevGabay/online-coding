@@ -1,0 +1,42 @@
+.smiley {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .smiley-face {
+    width: 100px;
+    height: 100px;
+    background-color: #ffeb3b;
+    border-radius: 50%;
+    position: relative;
+  }
+  
+  .smiley-eyes {
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    top: 25%;
+    left: 20%;
+    right: 20%;
+  }
+  
+  .smiley-eye {
+    width: 15px;
+    height: 15px;
+    background-color: #333;
+    border-radius: 50%;
+  }
+  
+  .smiley-mouth {
+    width: 60%;
+    height: 20px;
+    background-color: #333;
+    border-radius: 0 0 50px 50px;
+    position: absolute;
+    bottom: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  

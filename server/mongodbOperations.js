@@ -23,7 +23,11 @@ const fetchCodeBlocks = async () => {
   return codeBlocks;
 };
 
-
+const addCodeBlock = async (codeBlock) => {
+    const codeBlocksCollection = client.db("code-blocks").collection("online-code-review");
+    const result = await codeBlocksCollection.insertOne(codeBlock);
+    console.log('Code block added:', result);
+};
 
 async function clearData() {
     try {
@@ -36,8 +40,16 @@ async function clearData() {
     }
 }
 
+const numberOfCodeBlocks = async () => {
+    const codeBlocksCollection = client.db("code-blocks").collection("online-code-review");
+    const count = await codeBlocksCollection.countDocuments();
+    return count;
+  };
+
 module.exports = {
   connectToMongo,
   fetchCodeBlocks,
-  clearData
+  clearData,
+  addCodeBlock,
+  numberOfCodeBlocks
 };

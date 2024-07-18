@@ -2,7 +2,7 @@ const express = require('express');
 const http = require('http');
 const { fork } = require('child_process');
 const cors = require('cors');
-const { connectToMongo, fetchCodeBlocks } = require('./mongodbOperations');
+const { connectToMongo, fetchCodeBlocks, addCodeBlock, numberOfCodeBlocks } = require('./mongodbOperations');
 const config = require('./config-back');
 
 const app = express();
@@ -40,20 +40,34 @@ app.post('/create-room', (req, res) => {
   });
 });
 
-app.get('/rooms', (req, res) => {
-  res.json(Object.keys(workers));
-});
-
 app.get('/code-blocks', async (req, res) => {
     try {
-        console.log('Fetching code blocks');
       const codeBlocks = await fetchCodeBlocks();
       res.json(codeBlocks);
     } catch (err) {
       console.error(err.message);
       res.status(500).send('Server Error');
     }
+});
+  
+app.post('/code-blocks', async (req, res) => {
+    const { name, code, description, solution } = req.body;
+    if (!name || !code || !description) {
+      return res.status(400).json({ error: 'Name, code, and description are required' });
+    }
+  
+    try {
+      const count = await numberOfCodeBlocks();
+      await addCodeBlock({ id: count + 1, name, code, description, solution });
+      console.log('New code block created');
+      res.status(201).json({ success: true }); // Return a simple success response
+    } catch (err) {
+      console.error('Error creating code block:', err);
+      res.status(500).json({ success: false, message: 'Server Error' });
+    }
   });
+  
+  
   
 
 server.listen(config.backend.port, () => {

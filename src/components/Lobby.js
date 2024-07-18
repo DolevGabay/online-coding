@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import './Lobby.css';
 const config = require('../config.json');
 
-
 function Lobby() {
   const navigate = useNavigate();
   const [codeBlocks, setCodeBlocks] = useState([]);
@@ -63,6 +62,7 @@ function Lobby() {
           </div>
         ))}
       </div>
+      <button onClick={() => navigate('/create-code-block')}>Create Code Block</button>
     </div>
   );
   

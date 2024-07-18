@@ -2,10 +2,11 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 import { io } from 'socket.io-client';
 import Prism from 'prismjs';
-import 'prismjs/themes/prism-okaidia.css'; // Change to the desired theme
-import 'prismjs/components/prism-javascript'; // Import the language you need
+import 'prismjs/themes/prism-okaidia.css'; 
+import 'prismjs/components/prism-javascript'; 
 import './CodeBlock.css';
-import { v4 as uuidv4 } from 'uuid'; // Import uuid for generating unique identifiers
+import { v4 as uuidv4 } from 'uuid'; 
+import SmileyComponent from './SmileyComponent'; 
 const config = require('../config.json');
 
 function CodeBlock() {
@@ -13,10 +14,12 @@ function CodeBlock() {
   const location = useLocation();
   const [title, setTitle] = useState('');
   const [code, setCode] = useState('');
+  const [solution, setSolution] = useState(''); 
   const [isMentor, setIsMentor] = useState(false);
   const [socket, setSocket] = useState(null);
   const codeRef = useRef(null); // Create a ref for the code element
   const overlayRef = useRef(null); // Create a ref for the overlay element
+  const [smiley, setSmiley] = useState(false);
 
   const query = new URLSearchParams(location.search);
   const port = query.get('port');
@@ -39,6 +42,9 @@ function CodeBlock() {
     socket.on('load', (data) => {
       setTitle(data.name);
       setCode(data.code);
+      if(data.solution) {
+        setSolution(data.solution);  
+      }
       setIsMentor(data.isMentor);
     });
 
@@ -60,6 +66,13 @@ function CodeBlock() {
   const handleCodeChange = (event) => {
     const newCode = event.target.value;
     setCode(newCode);
+    if(newCode === solution && solution !== '') {
+      setSmiley(true);
+    }
+    else {
+        setSmiley(false);
+    }
+    
     socket.emit('update', newCode, parseInt(id));
     if (overlayRef.current) {
       overlayRef.current.innerHTML = Prism.highlight(newCode, Prism.languages.javascript, 'javascript');
@@ -77,7 +90,7 @@ function CodeBlock() {
 
   return (
     <div className="code-block">
-        <button onClick={() => window.location.href = '/'}>Back</button>
+      <button onClick={() => window.location.href = '/'}>Back</button>
       <h1>{isMentor ? `${title} - Mentor` : `${title} - Student`}</h1>
       {isMentor ? (
         <pre>
@@ -85,7 +98,7 @@ function CodeBlock() {
         </pre>
       ) : (
         <div className="editor-container">
-          <pre ref={overlayRef} className="overlay language-javascript" ></pre>
+          <pre ref={overlayRef} className="overlay language-javascript"></pre>
           <textarea
             className="code-textarea"
             value={code}
@@ -93,6 +106,7 @@ function CodeBlock() {
           ></textarea>
         </div>
       )}
+      {smiley && <SmileyComponent />} 
     </div>
   );
 }
