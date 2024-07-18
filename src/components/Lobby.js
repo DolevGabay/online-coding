@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Lobby.css';
-import config from '../config-front';
+import getConfig from '../config-front';
 
 function Lobby() {
   const navigate = useNavigate();
@@ -10,8 +10,8 @@ function Lobby() {
   useEffect(() => {
     const fetchCodeBlocks = async () => {
       try {
-        console.log(`${config.backend.url}/code-blocks`)
-        const response = await fetch(`${config.backend.url}/code-blocks`);
+        console.log(`${getConfig.backend.url}/code-blocks`)
+        const response = await fetch(`${getConfig.backend.url}/code-blocks`);
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
@@ -28,7 +28,7 @@ function Lobby() {
   const handleCreateRoom = async (roomId) => {
     console.log('Creating room', roomId);
     try {
-      const response = await fetch(`${config.backend.url}/create-room`, {
+      const response = await fetch(`${getConfig.backend.url}/create-room`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
