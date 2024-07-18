@@ -29,6 +29,7 @@ function Lobby() {
   const handleCreateRoom = async (roomId) => {
     console.log('Creating room', roomId);
     try {
+      const config = getConfig();
       const response = await fetch(`${config.backend.url}/create-room`, {
         method: 'POST',
         headers: {
