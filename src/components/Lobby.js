@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Lobby.css';
-const config = require('../config.json');
+import { getConfig } from '../config-front';
 
 
 function Lobby() {
@@ -11,7 +11,7 @@ function Lobby() {
   useEffect(() => {
     const fetchCodeBlocks = async () => {
       try {
-        console.log(`${config.backend.url}/code-blocks`)
+        const config = getConfig();
         const response = await fetch(`${config.backend.url}/code-blocks`);
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
