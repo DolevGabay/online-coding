@@ -46,6 +46,7 @@ app.get('/rooms', (req, res) => {
 
 app.get('/code-blocks', async (req, res) => {
     try {
+        console.log('Fetching code blocks');
       const codeBlocks = await fetchCodeBlocks();
       res.json(codeBlocks);
     } catch (err) {
