@@ -1,27 +1,22 @@
-import e from "express";
-
 const config = {
     "development": {
       "backend": {
         "port": 3000,
-        "url": "http://localhost:3000",
-        "clean": "http://localhost:",
+        "url": "http://localhost:3000"
       }
     },
     "production": {
       "backend": {
         "port": 3000,
-        "url": "http://3.68.213.133:3000",
-        "clean": "http://3.68.213.133:",
+        "url": "http://3.68.213.133:3000"
       }
     }
   };
   
   const getConfig = () => {
     const env = process.env.NODE_ENV || 'development';
-    console.log(env);
     return config[env];
   };
   
-  export default getConfig();
+  module.exports = getConfig();
   
