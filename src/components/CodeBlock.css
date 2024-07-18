@@ -1,0 +1,188 @@
+/* Container for the code block */
+body {
+    display: inline;
+}
+.code-block {
+    padding: 20px;
+    background-color: #2e3440;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    color: #d8dee9;
+  }
+  
+  /* Title styling */
+  .code-block h1 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: #88c0d0;
+  }
+  
+  /* Preformatted code block for mentors */
+  .code-block pre {
+    background-color: #3b4252;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    border-radius: 5px;
+    overflow-x: auto;
+    font-size: 1rem;
+    overflow-y: auto;
+  }
+  
+  /* Editor container */
+  .editor-container {
+    position: relative;
+  }
+  
+  /* Overlay for syntax highlighting */
+  .overlay {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    margin: 0px !important;
+    width: 90%;
+    height: 100%;
+    pointer-events: none;
+    white-space: pre-wrap; /* Preserve whitespace and line breaks */
+    word-break: break-all; /* Break long words to fit inside the container */
+    color: #d8dee9; /* Ensure overlay text color matches textarea */
+    z-index: 1;
+    overflow-y: auto;
+    
+
+  }
+  
+  /* Textarea styling */
+  .code-textarea {
+    width: 90%;
+    height: 400px;
+    background-color: transparent; /* Make the background transparent */
+    color: transparent; /* Make the text transparent */
+    caret-color: #d8dee9; /* Set the caret color to match the overlay text */
+    border: none;
+    border-radius: 5px;
+    padding: 20px;
+    font-size: 1rem;
+    line-height: 1.5;
+    resize: none;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 2;
+    position: relative;
+    overflow-y: auto;
+  }
+  
+  .code-textarea:focus {
+    outline: none;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2), 0 0 0 2px #88c0d0;
+  }
+  
+  /* Prism.js styling */
+  .prismjs {
+    display: block;
+    overflow-x: auto;
+    padding: 0.5em;
+    background: #2e3440;
+    color: #d8dee9;
+  }
+  
+  /* Adjusting Prism.js styling for textarea */
+  .code-textarea.prismjs {
+    white-space: pre-wrap; /* Preserve whitespace and line breaks */
+  }
+  
+  .language-javascript .token.comment,
+  .language-javascript .token.prolog,
+  .language-javascript .token.doctype,
+  .language-javascript .token.cdata {
+    color: #616e88;
+  }
+  
+  .language-javascript .token.punctuation {
+    color: #d8dee9;
+  }
+  
+  .language-javascript .token.property,
+  .language-javascript .token.tag,
+  .language-javascript .token.constant,
+  .language-javascript .token.symbol,
+  .language-javascript .token.deleted {
+    color: #81a1c1;
+  }
+  
+  .language-javascript .token.boolean,
+  .language-javascript .token.number {
+    color: #b48ead;
+  }
+  
+  .language-javascript .token.selector,
+  .language-javascript .token.attr-name,
+  .language-javascript .token.string,
+  .language-javascript .token.char,
+  .language-javascript .token.builtin,
+  .language-javascript .token.inserted {
+    color: #a3be8c;
+  }
+  
+  .language-javascript .token.operator,
+  .language-javascript .token.entity,
+  .language-javascript .token.url,
+  .language-javascript .language-css .token.string,
+  .style .token.string {
+    color: #d08770;
+  }
+  
+  .language-javascript .token.atrule,
+  .language-javascript .token.attr-value,
+  .language-javascript .token.keyword {
+    color: #ebcb8b;
+  }
+  
+  .language-javascript .token.function,
+  .language-javascript .token.class-name {
+    color: #8fbcbb;
+  }
+  
+  .language-javascript .token.regex,
+  .language-javascript .token.important,
+  .language-javascript .token.variable {
+    color: #88c0d0;
+  }
+  
+  .language-javascript .token.important,
+  .language-javascript .token.bold {
+    font-weight: bold;
+  }
+  
+  .language-javascript .token.italic {
+    font-style: italic;
+  }
+  
+  /* Button styling */
+button {
+    background-color: #f64c4c; /* Green background */
+    border: none; /* Remove borders */
+    color: white; /* White text */
+    padding: 5px 15px; /* Some padding */
+    text-align: center; /* Center the text */
+    text-decoration: none; /* Remove underline */
+    display: inline-block; /* Make the button inline-block */
+    font-size: 16px; /* Increase font size */
+    margin: 4px 2px; /* Add some margin */
+    cursor: pointer; /* Pointer/hand icon on hover */
+    border-radius: 12px; /* Rounded corners */
+    transition: background-color 0.3s, transform 0.3s; /* Smooth transitions */
+  }
+  
+  button:hover {
+    background-color: #ff9393; /* Darker green on hover */
+    transform: scale(1.05); /* Slightly increase size on hover */
+  }
+  
+  button:active {
+    background-color: #f64c4c; /* Even darker green when clicked */
+    transform: scale(1); /* Return to original size when clicked */
+  }
+  
+  button:focus {
+    outline: none; /* Remove outline */
+    box-shadow: 0 0 10px #719ECE; /* Add a shadow on focus */
+  }
+  
