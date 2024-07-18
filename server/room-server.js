@@ -3,7 +3,7 @@ const http = require('http');
 const { Server } = require('socket.io');
 const cors = require('cors');
 const { connectToMongo, fetchCodeBlocks } = require('./mongodbOperations');
-import getConfig from './config-back';
+const getConfig = require('./config-back');
 
 const port = process.argv[3];
 
