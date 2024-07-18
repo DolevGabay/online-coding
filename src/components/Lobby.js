@@ -8,6 +8,7 @@ function Lobby() {
   const [codeBlocks, setCodeBlocks] = useState([]);
 
   useEffect(() => {
+    console.log('Fetching code blocks1');
     const fetchCodeBlocks = async () => {
       try {
         console.log('Fetching code blocks');
