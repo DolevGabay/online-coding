@@ -10,11 +10,11 @@ const config = {
     },
     "production": {
       "backend": {
-        "port": 80,
+        "port": 3000,
         "mongoURI": "mongodb+srv://dolevg621:uBcPanAlolih5z3d@cluster0.sq5d07w.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
       },
       "frontend": {
-        "url": "https://your-production-frontend-url.com"
+        "url": "http://3.68.213.133:8000"
       }
     }
   }
