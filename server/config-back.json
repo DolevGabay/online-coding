@@ -3,5 +3,8 @@
     "port": 8000,
     "url": "http://3.68.213.133:8000",
     "clean": "http://3.68.213.133:"
+  }, "backend": {
+    "port": 3000,
+    "mongoURI": "mongodb+srv://dolevg621:uBcPanAlolih5z3d@cluster0.sq5d07w.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
   }
 }
