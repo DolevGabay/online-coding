@@ -1,3 +1,5 @@
+import e from "express";
+
 const config = {
     "development": {
       "backend": {
@@ -17,6 +19,7 @@ const config = {
   
   const getConfig = () => {
     const env = process.env.NODE_ENV || 'development';
+    console.log(env);
     return config[env];
   };
   
