@@ -4,6 +4,7 @@ import Prism from 'prismjs';
 import 'prismjs/themes/prism-okaidia.css'; 
 import 'prismjs/components/prism-javascript'; 
 import './NewCodeBlock.css';
+import CodeEditor from './CodeEditor'; 
 const config = require('../config.json');
 
 function NewCodeBlock() {
@@ -13,24 +14,6 @@ function NewCodeBlock() {
   const [description, setDescription] = useState('');
   const [solution, setSolution] = useState('');
   const [error, setError] = useState(null);
-  const overlayRef = useRef(null);
-  const solutionOverlayRef = useRef(null);
-
-  const handleCodeChange = (event) => {
-    const newCode = event.target.value;
-    setCode(newCode);
-    if (overlayRef.current) {
-      overlayRef.current.innerHTML = Prism.highlight(newCode, Prism.languages.javascript, 'javascript');
-    }
-  };
-
-  const handleSolutionChange = (event) => {
-    const newSolution = event.target.value;
-    setSolution(newSolution);
-    if (solutionOverlayRef.current) {
-      solutionOverlayRef.current.innerHTML = Prism.highlight(newSolution, Prism.languages.javascript, 'javascript');
-    }
-  };
 
   const handleSubmit = async (e) => {
     if (!name || !code) {
@@ -62,17 +45,13 @@ function NewCodeBlock() {
     }
   };
 
-  useEffect(() => {
-    if (overlayRef.current) {
-      overlayRef.current.innerHTML = Prism.highlight(code, Prism.languages.javascript, 'javascript');
-    }
-  }, [code]);
+  const handleCodeChange = (event)  => {
+    setCode(event.target.value);
+  };
 
-  useEffect(() => {
-    if (solutionOverlayRef.current) {
-      solutionOverlayRef.current.innerHTML = Prism.highlight(solution, Prism.languages.javascript, 'javascript');
-    }
-  }, [solution]);
+  const handleSolutionChange = (event)  => {
+    setSolution(event.target.value);
+  };
 
   return (
     <div className="new-code-block-container">
@@ -91,16 +70,7 @@ function NewCodeBlock() {
         </div>
         <div className="form-group">
           <label htmlFor="code">Code:</label>
-          <div className="editor-container">
-            <pre ref={overlayRef} className="overlay language-javascript"></pre>
-            <textarea
-              id="code"
-              className="code-textarea"
-              value={code}
-              onChange={handleCodeChange}
-              required
-            ></textarea>
-          </div>
+          <CodeEditor code={code} handleCodeChange={handleCodeChange} /> 
         </div>
         <div className="form-group">
           <label htmlFor="description">Description:</label>
@@ -113,16 +83,7 @@ function NewCodeBlock() {
         </div>
         <div className="form-group">
           <label htmlFor="solution">Solution:</label>
-          <div className="editor-container">
-            <pre ref={solutionOverlayRef} className="overlay language-javascript"></pre>
-            <textarea
-              id="solution"
-              className="code-textarea"
-              value={solution}
-              onChange={handleSolutionChange}
-              required
-            ></textarea>
-          </div>
+          <CodeEditor code={solution} handleCodeChange={handleSolutionChange} /> 
         </div>
         <button type="submit">Create Code Block</button>
       </form>

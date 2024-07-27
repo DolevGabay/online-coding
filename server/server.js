@@ -29,13 +29,17 @@ app.post('/create-room', (req, res) => {
   }
 
   const port = 3000 + parseInt(roomId);
-  const worker = fork('room-server.js', [roomId, port]);
+  const worker = fork('room-server.js', [roomId, port]); // Create a new process
   workers[roomId] = worker;
   roomPorts[roomId] = port;
 
   worker.on('message', (message) => {
     if (message.type === 'started') {
       res.json({ roomId, port: message.port });
+    } else if (message.type === 'closed') {
+      console.log(`Room ${roomId} on port ${message.port} has been closed`);
+      delete workers[roomId];
+      delete roomPorts[roomId];
     }
   });
 });

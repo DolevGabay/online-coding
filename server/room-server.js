@@ -2,10 +2,10 @@ const express = require('express');
 const http = require('http');
 const { Server } = require('socket.io');
 const cors = require('cors');
-const { connectToMongo, fetchCodeBlocks } = require('./mongodbOperations');
+const { connectToMongo, fetchCodeBlock } = require('./mongodbOperations');
 const config = require('./config-back');
 
-const port = process.argv[3];
+const port = process.argv[3]; // Port is passed as an argument from the "fork" call in server.js
 
 connectToMongo();
 
@@ -33,10 +33,9 @@ io.on('connection', (socket) => {
 
   socket.on('load', async (id) => {
     try {
-        const codeBlocks = await fetchCodeBlocks();
-        const codeBlock = codeBlocks.find(block => block.id === id);
+        const codeBlock = await fetchCodeBlock(id);
         if (codeBlock) {
-          socket.emit('load', { name: codeBlock.name, code: codeBlock.code,solution : codeBlock.solution , isMentor });
+          socket.emit('load', { name: codeBlock.name, code: codeBlock.code, solution : codeBlock.solution , isMentor });
         }
       } catch (err) {
         console.error(err.message);
@@ -46,8 +45,7 @@ io.on('connection', (socket) => {
 
   socket.on('update', async (newCode, id) => {
     try {
-        const codeBlocks = await fetchCodeBlocks();
-        const codeBlock = codeBlocks.find(block => block.id === id);
+        const codeBlock = await fetchCodeBlock(id);
         if (codeBlock) {
           codeBlock.code = newCode;
           socket.broadcast.emit('update', newCode);
@@ -62,6 +60,15 @@ io.on('connection', (socket) => {
     usersCount--;
     console.log('user disconnected, mentor:', isMentor);
     console.log('users count:', usersCount);
+    if (usersCount === 0) {
+      console.log(`No users left, shutting down server on port ${port}`);
+      io.close(() => {
+        server.close(() => {
+          process.send({ type: 'closed', port });
+          process.exit(0);
+        });
+      });
+    }
   });
 });
 
@@ -69,4 +76,3 @@ server.listen(port, () => {
   console.log(`Worker ${process.pid} started on port ${port}`);
   process.send({ type: 'started', port });
 });
-

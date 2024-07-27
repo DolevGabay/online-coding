@@ -10,7 +10,6 @@ function Lobby() {
   useEffect(() => {
     const fetchCodeBlocks = async () => {
       try {
-        console.log(`${config.backend.url}/code-blocks`)
         const response = await fetch(`${config.backend.url}/code-blocks`);
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
@@ -26,7 +25,6 @@ function Lobby() {
   }, []);
   
   const handleCreateRoom = async (roomId) => {
-    console.log('Creating room', roomId);
     try {
       const response = await fetch(`${config.backend.url}/create-room`, {
         method: 'POST',
@@ -35,10 +33,12 @@ function Lobby() {
         },
         body: JSON.stringify({ roomId })
       });
+
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
-      const { port, isMentor } = await response.json();
+
+      const { port } = await response.json();
       navigate(`/codeblock/${roomId}?port=${port}`);
     } catch (error) {
       console.error('Error creating room:', error);

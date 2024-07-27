@@ -23,6 +23,14 @@ const fetchCodeBlocks = async () => {
   return codeBlocks;
 };
 
+const fetchCodeBlock = async (id) => {
+    const codeBlocksCollection = client.db("code-blocks").collection("online-code-review");
+    const codeBlock = await codeBlocksCollection.findOne({
+      id
+    });
+    return codeBlock;
+};
+
 const addCodeBlock = async (codeBlock) => {
     const codeBlocksCollection = client.db("code-blocks").collection("online-code-review");
     const result = await codeBlocksCollection.insertOne(codeBlock);
@@ -49,6 +57,7 @@ const numberOfCodeBlocks = async () => {
 module.exports = {
   connectToMongo,
   fetchCodeBlocks,
+  fetchCodeBlock,
   clearData,
   addCodeBlock,
   numberOfCodeBlocks
